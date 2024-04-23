@@ -1,0 +1,6 @@
+C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\EmployeeDirectory.UI.csproj.AssemblyReference.cache
+C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\EmployeeDirectory.UI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\EmployeeDirectory.UI.AssemblyInfoInputs.cache
+C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\EmployeeDirectory.UI.AssemblyInfo.cs
+C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\EmployeeDirectory.UI.csproj.CoreCompileInputs.cache
+C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\EmployeeDirectory.UI.sourcelink.json

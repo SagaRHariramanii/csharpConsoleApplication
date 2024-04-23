@@ -1,4 +1,4 @@
-﻿using EmployeeDirectory.Common.Model;
+﻿using EmployeeDirectory.Common;
 using EmployeeDirectory.Common.Services;
 using EmployeeDirectory.Models;
 using EmployeeDirectory.Services;
