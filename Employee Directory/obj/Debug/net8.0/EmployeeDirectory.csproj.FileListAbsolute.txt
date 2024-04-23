@@ -1,0 +1,14 @@
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\EmployeeDirectory.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\EmployeeDirectory.AssemblyInfoInputs.cache
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\EmployeeDirectory.AssemblyInfo.cs
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\EmployeeDirectory.csproj.CoreCompileInputs.cache
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\bin\Debug\net8.0\EmployeeDirectory.exe
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\bin\Debug\net8.0\EmployeeDirectory.deps.json
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\bin\Debug\net8.0\EmployeeDirectory.runtimeconfig.json
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\bin\Debug\net8.0\EmployeeDirectory.dll
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\bin\Debug\net8.0\EmployeeDirectory.pdb
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\EmployeeDirectory.dll
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\refint\EmployeeDirectory.dll
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\EmployeeDirectory.pdb
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\EmployeeDirectory.genruntimeconfig.cache
+C:\Users\sagar.h\source\repos\Employee Directory\Employee Directory\obj\Debug\net8.0\ref\EmployeeDirectory.dll
