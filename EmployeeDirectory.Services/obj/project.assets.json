@@ -35,8 +35,8 @@
     },
     "EmployeeDirectory.Models/1.0.0": {
       "type": "project",
-      "path": "../EmployeeDirectory.UI/EmployeeDirectory.Models.csproj",
-      "msbuildProject": "../EmployeeDirectory.UI/EmployeeDirectory.Models.csproj"
+      "path": "../EmployeeDirectory.Models/EmployeeDirectory.Models.csproj",
+      "msbuildProject": "../EmployeeDirectory.Models/EmployeeDirectory.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {

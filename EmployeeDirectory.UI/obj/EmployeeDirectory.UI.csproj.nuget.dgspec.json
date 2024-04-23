@@ -4,14 +4,14 @@
     "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.UI\\EmployeeDirectory.UI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\Employee Directory\\EmployeeDirectory.Models.csproj": {
+    "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Data\\EmployeeDirectory.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\Employee Directory\\EmployeeDirectory.Models.csproj",
-        "projectName": "EmployeeDirectory.Models",
-        "projectPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\Employee Directory\\EmployeeDirectory.Models.csproj",
+        "projectUniqueName": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Data\\EmployeeDirectory.Data.csproj",
+        "projectName": "EmployeeDirectory.Data",
+        "projectPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Data\\EmployeeDirectory.Data.csproj",
         "packagesPath": "C:\\Users\\sagar.h\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\Employee Directory\\obj\\",
+        "outputPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sagar.h\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,7 +27,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Models\\EmployeeDirectory.Models.csproj": {
+                "projectPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Models\\EmployeeDirectory.Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -64,14 +68,14 @@
         }
       }
     },
-    "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Data\\EmployeeDirectory.Data.csproj": {
+    "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Models\\EmployeeDirectory.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Data\\EmployeeDirectory.Data.csproj",
-        "projectName": "EmployeeDirectory.Data",
-        "projectPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Data\\EmployeeDirectory.Data.csproj",
+        "projectUniqueName": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Models\\EmployeeDirectory.Models.csproj",
+        "projectName": "EmployeeDirectory.Models",
+        "projectPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Models\\EmployeeDirectory.Models.csproj",
         "packagesPath": "C:\\Users\\sagar.h\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Data\\obj\\",
+        "outputPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sagar.h\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -87,11 +91,7 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {
-              "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\Employee Directory\\EmployeeDirectory.Models.csproj": {
-                "projectPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\Employee Directory\\EmployeeDirectory.Models.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {

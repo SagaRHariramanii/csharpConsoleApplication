@@ -1,77 +1,77 @@
 [
   {
-    "RoleId": "R1",
-    "RoleName": "Customer service Manager",
+    "Id": "R1",
+    "Name": "Customer service Manager",
     "Location": "Bangalore",
     "Department": "IT",
     "Description": "Customer Service Manager "
   },
   {
-    "RoleId": "R2",
-    "RoleName": "UX Designer",
+    "Id": "R2",
+    "Name": "UX Designer",
     "Location": "Hyderabad",
     "Department": "Product Engg.",
     "Description": "UX Designer "
   },
   {
-    "RoleId": "R3",
-    "RoleName": "Assistant Front-end Developer",
+    "Id": "R3",
+    "Name": "Assistant Front-end Developer",
     "Location": "Bangalore",
     "Department": "UI/UX",
     "Description": "Assistant Front-end Developer"
   },
   {
-    "RoleId": "R4",
-    "RoleName": "Human Resource Manager",
+    "Id": "R4",
+    "Name": "Human Resource Manager",
     "Location": "Hyderabad",
     "Department": "IT",
     "Description": "Human Resource Manager "
   },
   {
-    "RoleId": "R5",
-    "RoleName": "Front End Developer",
+    "Id": "R5",
+    "Name": "Front End Developer",
     "Location": "Bangalore",
     "Department": "Product Engg.",
     "Description": "Front-end Developer "
   },
   {
-    "RoleId": "R6",
-    "RoleName": "Intern",
+    "Id": "R6",
+    "Name": "Intern",
     "Location": "Hyderabad",
     "Department": "Product Engg.",
     "Description": "Intern "
   },
   {
-    "RoleId": "R7",
-    "RoleName": "SDE2",
+    "Id": "R7",
+    "Name": "SDE2",
     "Location": "HYD",
     "Department": "Product Engineer",
     "Description": "Software Developer 2"
   },
   {
-    "RoleId": "R8",
-    "RoleName": "Marketing",
+    "Id": "R8",
+    "Name": "Marketing",
     "Location": "HYD",
     "Department": "Marketing",
     "Description": "Digital Marketing"
   },
   {
-    "RoleId": "R9",
-    "RoleName": "IT Enigneer",
+    "Id": "R9",
+    "Name": "IT Enigneer",
     "Location": "Hyderabad",
     "Department": "IT",
     "Description": ""
   },
   {
-    "RoleId": "R10",
-    "RoleName": "Growth Marketer",
+    "Id": "R10",
+    "Name": "Growth Marketer",
     "Location": "Hyderabad",
     "Department": "Marketing",
     "Description": "Marketing"
   },
   {
-    "RoleId": "R11",
-    "RoleName": "QA",
+    "Id": "R11",
+    "Name": "QA",
     "Location": "HYD",
     "Department": "Manaual Tester",
     "Description": "Quality Tester"

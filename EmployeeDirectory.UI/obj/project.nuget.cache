@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RgnHg8+O0cP71r3XmX9cFClOSvEa7U5ZYF14v8VwkdsmgVZ/fofumHJfU+DJHBRAC5S02B3BKl3XQFxqhS61AQ==",
+  "dgSpecHash": "gwFl3bAh5D4608VNiVeTkXZOMVlfXlrwrBw9AgoziCdoXG4W7rUZlW0AR4365DUlgj75eXfPY4s3Uwt1UT6XfQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.UI\\EmployeeDirectory.Models.csproj",
+  "projectFilePath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.UI\\EmployeeDirectory.UI.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

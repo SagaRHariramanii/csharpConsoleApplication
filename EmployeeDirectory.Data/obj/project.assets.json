@@ -17,8 +17,8 @@
   "libraries": {
     "EmployeeDirectory.Models/1.0.0": {
       "type": "project",
-      "path": "../EmployeeDirectory.UI/EmployeeDirectory.Models.csproj",
-      "msbuildProject": "../EmployeeDirectory.UI/EmployeeDirectory.Models.csproj"
+      "path": "../EmployeeDirectory.Models/EmployeeDirectory.Models.csproj",
+      "msbuildProject": "../EmployeeDirectory.Models/EmployeeDirectory.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -53,8 +53,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.UI\\EmployeeDirectory.Models.csproj": {
-              "projectPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.UI\\EmployeeDirectory.Models.csproj"
+            "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Models\\EmployeeDirectory.Models.csproj": {
+              "projectPath": "C:\\Users\\sagar.h\\source\\repos\\Employee Directory\\EmployeeDirectory.Models\\EmployeeDirectory.Models.csproj"
             }
           }
         }

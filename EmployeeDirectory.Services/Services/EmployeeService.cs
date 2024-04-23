@@ -1,42 +1,33 @@
-﻿using EmployeeDirectory.Data;
+﻿using EmployeeDirectory.Common;
+using EmployeeDirectory.Data;
 using EmployeeDirectory.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Transactions;
-using EmployeeDirectory.Common;
+using EmployeeDirectory.Services.Contract;
 
 namespace EmployeeDirectory.Services
 {
-    public class EmployeeService
+    public class EmployeeService:IEmployee
     {
-        public static void AddEmployee(Employee emp)
+        public  void AddEmployee(Employee emp)
         {
             List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
             employeeDataList.Add(emp);
             JsonFileHandler.AddEmployeeToJson(employeeDataList);
         }
-        public static void EditEmployee(string empId, Employee empData)
+        public  void EditEmployee(string empId, Employee empData)
         {
             List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
             int index = employeeDataList.FindIndex(emp => emp.EmpId == empId);
-            employeeDataList[index]=empData;
+            employeeDataList[index] = empData;
             JsonFileHandler.AddEmployeeToJson(employeeDataList);
         }
-        public static Validation DeleteEmployee(string employeeId)
+        public  ValidationResult DeleteEmployee(string employeeId)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
 
             List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
             int index = employeeDataList.FindIndex(emp => emp.EmpId == employeeId);
             Employee employeeData = GetEmployeeDataById(employeeId)!;
-            if (index == -1||employeeData.IsDeleted)
+            if (index == -1 || employeeData.IsDeleted)
             {
                 validator.IsValid = false;
                 validator.Message = "Employee with Employee Id " + employeeId + " Not Found!";
@@ -51,9 +42,9 @@ namespace EmployeeDirectory.Services
                 return validator;
             }
         }
-        public static Employee? GetEmployeeDataById(string empId)
+        public  Employee? GetEmployeeDataById(string empId)
         {
-            
+
             List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
             Employee employeeData = (from emp in employeeDataList where emp.EmpId == empId select emp).FirstOrDefault()!;
             if (employeeData == null)
@@ -66,11 +57,11 @@ namespace EmployeeDirectory.Services
             }
 
         }
-        public static List<Employee> GetEmployeeDataList()
+        public  List<Employee> GetEmployeeDataList()
         {
             return JsonFileHandler.GetEmployeeData();
         }
-        
+
 
     }
 }

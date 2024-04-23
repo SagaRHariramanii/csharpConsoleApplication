@@ -1,21 +1,17 @@
 ﻿using EmployeeDirectory.Data;
 using EmployeeDirectory.Models;
-using System;
-using System.Collections.Generic;
+using EmployeeDirectory.Services.Contract;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace EmployeeDirectory.Common.Services
 {
-    public class ValidationService
+    public class ValidationService:IValidation
     {
-        public static Validation ValidateEmployeeId(string empId)
+        public  ValidationResult ValidateEmployeeId(string empId)
         {
             List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
-            Validation validator = new();
+            ValidationResult validator = new();
             var employeeIdRegex = @"^TZ\d{4}$";
             bool isEmployeeIdValid = Regex.IsMatch(empId, employeeIdRegex);
             bool isEmployeeIdUnique = true;
@@ -61,9 +57,9 @@ namespace EmployeeDirectory.Common.Services
                 return validator;
             }
         }
-        public static Validation ValidateFirstName(string firstName)
+        public  ValidationResult ValidateFirstName(string firstName)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
             var firstNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
             bool isFirstNameValid = Regex.IsMatch(firstName, firstNameRegex);
             if (string.IsNullOrEmpty(firstName))
@@ -87,9 +83,9 @@ namespace EmployeeDirectory.Common.Services
                 }
             }
         }
-        public static Validation ValidateLastName(string lastName)
+        public  ValidationResult ValidateLastName(string lastName)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
             var lastNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
             bool isLastNameValid = Regex.IsMatch(lastName, lastNameRegex);
             if (isLastNameValid)
@@ -106,9 +102,9 @@ namespace EmployeeDirectory.Common.Services
             }
         }
 
-        public static Validation ValidateEmail(string email)
+        public  ValidationResult ValidateEmail(string email)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
             var emailRegex = @"^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$";
             bool isEmailValid = Regex.IsMatch(email, emailRegex);
             if (string.IsNullOrEmpty(email))
@@ -132,9 +128,9 @@ namespace EmployeeDirectory.Common.Services
                 }
             }
         }
-        public static Validation ValidatePhoneNumber(string phoneNo)
+        public  ValidationResult ValidatePhoneNumber(string phoneNo)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
             var phoneNoRegex = @"^\d{10}$";
             bool isPhoneNoValid = Regex.IsMatch(phoneNo, phoneNoRegex);
             if (string.IsNullOrEmpty(phoneNo))
@@ -158,9 +154,9 @@ namespace EmployeeDirectory.Common.Services
                 }
             }
         }
-        public static Validation ValidateDate(string dob)
+        public  ValidationResult ValidateDate(string dob)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
             bool isDateValid = DateOnly.TryParse(dob, CultureInfo.CurrentCulture, out DateOnly date);
             if (isDateValid)
             {
@@ -174,9 +170,9 @@ namespace EmployeeDirectory.Common.Services
                 return validator;
             }
         }
-        public static Validation ValidateRoleName(string roleName)
+        public  ValidationResult ValidateRoleName(string roleName)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
             var roleNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
             bool isRoleNameValid = Regex.IsMatch(roleName, roleNameRegex);
             if (string.IsNullOrEmpty(roleName))
@@ -200,9 +196,9 @@ namespace EmployeeDirectory.Common.Services
                 }
             }
         }
-        public static Validation ValidateLocation(string location)
+        public  ValidationResult ValidateLocation(string location)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
             var locationNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
             bool isLocationValid = Regex.IsMatch(location, locationNameRegex);
             if (string.IsNullOrEmpty(location))
@@ -226,9 +222,9 @@ namespace EmployeeDirectory.Common.Services
                 }
             }
         }
-        public static Validation ValidateDepartment(string department)
+        public  ValidationResult ValidateDepartment(string department)
         {
-            Validation validator = new();
+            ValidationResult validator = new();
             var departmentNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
             bool isDepartmentValid = Regex.IsMatch(department, departmentNameRegex);
             if (string.IsNullOrEmpty(department))
