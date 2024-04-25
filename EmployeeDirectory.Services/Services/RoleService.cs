@@ -3,57 +3,51 @@ using EmployeeDirectory.Models;
 using EmployeeDirectory.Services.Contract;
 namespace EmployeeDirectory.Services
 {
-    public class RoleService:IRole
+    public class RoleService : IRoleService
     {
-
-        public  void AddRole(Role role)
+        public void AddRole(Role role)
         {
-            List<Role> roleDataList = JsonFileHandler.GetRoleData();
+            List<Role> roleDataList = JsonFileHandler.GetData<Role>();
             roleDataList.Add(role);
-            JsonFileHandler.AddRoleToJson(roleDataList);
+            JsonFileHandler.AddDataToJson(roleDataList);
         }
-        public  Dictionary<string, string> GetRoleInformation(string roleId)
+        public Role? GetRoleInformation(string roleId)
         {
-            List<Role> roleDataList = JsonFileHandler.GetRoleData();
-            Dictionary<string, string> roleInfo = [];
+            List<Role> roleDataList = JsonFileHandler.GetData<Role>();
+            Role roleObj = new();
             foreach (Role role in roleDataList)
             {
                 if (role.Id == roleId)
                 {
-                    roleInfo.Add("Location", role.Location);
-                    roleInfo.Add("Department", role.Department);
-                    roleInfo.Add("RoleName", role.Name);
-                    return roleInfo;
-                }
-            }
-            return [];
-        }
-        public  string? GetRoleId(string location, string department, string roleName)
-        {
-            List<Role> roleDataList = JsonFileHandler.GetRoleData();
-            foreach (Role role in roleDataList)
-            {
-                if (role.Location == location && role.Department == department && role.Name == roleName)
-                {
-                    return role.Id;
+                    roleObj.Name = role.Name;
+                    roleObj.Location = role.Location;
+                    roleObj.Department = role.Department;
+                    return roleObj;
                 }
             }
             return null;
         }
-        public  int GetRoleCount()
+        public string? GetRoleId(string roleName, string location, string department)
         {
-            List<Role> roleDataList = JsonFileHandler.GetRoleData();
+            List<Role> roleDataList = JsonFileHandler.GetData<Role>();
+            string roleId = (from role in roleDataList where role.Name == roleName && role.Location == location && role.Department == department select role.Id).FirstOrDefault()!;
+            return roleId;
+        }
+        public int GetRoleCount()
+        {
+            List<Role> roleDataList = JsonFileHandler.GetData<Role>();
             return roleDataList.Count;
         }
-        public  Role GetRoleDataByIndex(int index)
+        public Role GetRoleDataByIndex(int index)
         {
-            List<Role> roleDataList = JsonFileHandler.GetRoleData();
+            //dont depend on index
+            List<Role> roleDataList = JsonFileHandler.GetData<Role>();
             return roleDataList[index];
 
         }
-        public  List<Role> GetRoleDataList()
+        public List<Role> GetRoleDataList()
         {
-            return JsonFileHandler.GetRoleData();
+            return JsonFileHandler.GetData<Role>();
         }
 
     }

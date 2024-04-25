@@ -10,4 +10,13 @@
     <ProjectReference Include="..\EmployeeDirectory.Models\EmployeeDirectory.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\role.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

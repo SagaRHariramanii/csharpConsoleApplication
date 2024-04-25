@@ -5,63 +5,38 @@ using EmployeeDirectory.Services.Contract;
 
 namespace EmployeeDirectory.Services
 {
-    public class EmployeeService:IEmployee
-    {
-        public  void AddEmployee(Employee emp)
-        {
-            List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
-            employeeDataList.Add(emp);
-            JsonFileHandler.AddEmployeeToJson(employeeDataList);
-        }
-        public  void EditEmployee(string empId, Employee empData)
-        {
-            List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
-            int index = employeeDataList.FindIndex(emp => emp.EmpId == empId);
-            employeeDataList[index] = empData;
-            JsonFileHandler.AddEmployeeToJson(employeeDataList);
-        }
-        public  ValidationResult DeleteEmployee(string employeeId)
-        {
-            ValidationResult validator = new();
 
-            List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
-            int index = employeeDataList.FindIndex(emp => emp.EmpId == employeeId);
-            Employee employeeData = GetEmployeeDataById(employeeId)!;
-            if (index == -1 || employeeData.IsDeleted)
-            {
-                validator.IsValid = false;
-                validator.Message = "Employee with Employee Id " + employeeId + " Not Found!";
-                return validator;
-            }
-            else
-            {
+    public class EmployeeService : IEmployeeService
+    {
+        public void AddEmployee(Employee emp)
+        {
+            List<Employee> employeeDataList = JsonFileHandler.GetData<Employee>();
+            employeeDataList.Add(emp);
+            JsonFileHandler.AddDataToJson(employeeDataList);
+        }
+        public void EditEmployee(string empId, Employee empData)
+        {
+            List<Employee> employeeDataList = JsonFileHandler.GetData<Employee>();
+            //write string extension methods to compare by ignoring cases.
+            int index = employeeDataList.FindIndex(emp => emp.EmpId.Equals(empId));
+            employeeDataList[index] = empData;
+            JsonFileHandler.AddDataToJson(employeeDataList);
+        }
+
+        public void DeleteEmployee(string employeeId,Employee employeeData)
+        {
                 employeeData.IsDeleted = true;
                 EditEmployee(employeeId, employeeData);
-                validator.IsValid = true;
-                validator.Message = "Employee with Employee Id " + employeeId + " Deleted Successfully!";
-                return validator;
-            }
         }
-        public  Employee? GetEmployeeDataById(string empId)
+        public Employee? GetEmployeeDataById(string empId)
         {
-
-            List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
+            List<Employee> employeeDataList = JsonFileHandler.GetData<Employee>();
             Employee employeeData = (from emp in employeeDataList where emp.EmpId == empId select emp).FirstOrDefault()!;
-            if (employeeData == null)
-            {
-                return null;
-            }
-            else
-            {
-                return employeeData;
-            }
-
+            return employeeData;
         }
-        public  List<Employee> GetEmployeeDataList()
+        public List<Employee> GetEmployeeDataList()
         {
-            return JsonFileHandler.GetEmployeeData();
+            return JsonFileHandler.GetData<Employee>();
         }
-
-
     }
 }

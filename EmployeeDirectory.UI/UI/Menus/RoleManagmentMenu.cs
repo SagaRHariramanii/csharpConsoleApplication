@@ -1,15 +1,13 @@
 ﻿using EmployeeDirectory.Common;
 using EmployeeDirectory.Common.Services;
-using EmployeeDirectory.Contract;
 using EmployeeDirectory.Models;
 using EmployeeDirectory.Services;
 
 namespace EmployeeDirectory.UI.Menus
 {
 
-    public class RoleManagmentMenu : IRoleManagmentMenu
+    public class RoleManagmentMenu
     {
-        ValidationService validationService = new();
         RoleService roleService = new();
         public static void RoleManagmentMenuOptions()
         {
@@ -18,28 +16,37 @@ namespace EmployeeDirectory.UI.Menus
             Console.WriteLine("2. Display all Roles");
             Console.WriteLine("3. Go Back");
             Console.Write("Choice = ");
-            int roleManagmentChoice = int.Parse(Console.ReadLine()!);
-            switch (roleManagmentChoice)
+            int roleManagmentChoice = Parser.ParseToInt(Console.ReadLine()!);
+            if (roleManagmentChoice==-1)
             {
-                case 1:
-                    roleManagmentMenu.OptionAddRole();
-                    break;
-                case 2:
-                    roleManagmentMenu.OptionDisplayAllRoles();
-                    break;
-                case 3:
-                    MainMenuOptions.DisplayMainMenuOptions();
-                    break;
-                default:
-                    Console.WriteLine("Invalid Choice");
-                    break;
+                Console.WriteLine("Invalid Choice Select Again");
+                RoleManagmentMenuOptions();
             }
+            else
+            {
+                switch (roleManagmentChoice)
+                {
+                    case 1:
+                        roleManagmentMenu.OptionAddRole();
+                        break;
+                    case 2:
+                        roleManagmentMenu.OptionDisplayAllRoles();
+                        break;
+                    case 3:
+                        MainMenuOptions.DisplayMainMenuOptions();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Choice");
+                        break;
+                }
+            }
+
         }
-        public string GetRoleName()
+        public static string GetRoleName()
         {
             Console.Write("Enter the Role Name : ");
             string roleName = Console.ReadLine()!;
-            ValidationResult RoleNameValidator = validationService.ValidateRoleName(roleName);
+            ValidationResult RoleNameValidator = ValidationService.ValidateRoleName(roleName);
             if (!RoleNameValidator.IsValid)
             {
                 Console.WriteLine(RoleNameValidator.Message);
@@ -51,11 +58,11 @@ namespace EmployeeDirectory.UI.Menus
                 return roleName;
             }
         }
-        public string GetLocation()
+        public static string GetLocation()
         {
             Console.Write("Enter Location : ");
             string location = Console.ReadLine()!;
-            ValidationResult LocationValidator = validationService.ValidateLocation(location);
+            ValidationResult LocationValidator = ValidationService.ValidateLocation(location);
             if (!LocationValidator.IsValid)
             {
                 Console.WriteLine(LocationValidator.Message);
@@ -67,11 +74,11 @@ namespace EmployeeDirectory.UI.Menus
                 return location;
             }
         }
-        public string GetDepartment()
+        public static string GetDepartment()
         {
             Console.Write("Enter the Department : ");
             string department = Console.ReadLine()!;
-            ValidationResult departmentValidator = validationService.ValidateDepartment(department);
+            ValidationResult departmentValidator = ValidationService.ValidateDepartment(department);
             if (!departmentValidator.IsValid)
             {
                 Console.WriteLine(departmentValidator.Message);
@@ -83,13 +90,13 @@ namespace EmployeeDirectory.UI.Menus
                 return department;
             }
         }
-        public string GetJobTitle()
+        public static string GetJobTitle()
         {
             Console.Write("Enter the Job Title : ");
             string jobTitle = Console.ReadLine()!;
             return jobTitle;
         }
-        public string GetRoleDescription()
+        public static string GetRoleDescription()
         {
             Console.Write("Enter the Job Description : ");
             string roleDescription = Console.ReadLine()!;

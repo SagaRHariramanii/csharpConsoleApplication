@@ -5,29 +5,36 @@ namespace EmployeeDirectory.Data
 {
     public class JsonFileHandler
     {
-        public static readonly string RoleFilePath = Path.GetFullPath("../../../../EmployeeDirectory.Data/Data/role.json");
-        public static readonly string EmployeeFilePath = Path.GetFullPath("../../../../EmployeeDirectory.Data/Data/employee.json");
-        public static List<Employee> GetEmployeeData()
+        public static readonly string employeeFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "employee.json");
+        public static readonly string roleFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "role.json");
+
+        public static List<T> GetData<T>()
         {
-            string employeeData = File.ReadAllText(EmployeeFilePath);
-            List<Employee> employeeDataList = JsonSerializer.Deserialize<List<Employee>>(employeeData)!;
-            return employeeDataList;
+            var type=typeof(T);
+            string jsonData;
+            if (type == typeof(Role))
+            {
+                jsonData = File.ReadAllText(roleFilePath);
+            }
+            else
+            {
+                jsonData = File.ReadAllText(employeeFilePath);
+            }
+            List<T> dataList = JsonSerializer.Deserialize<List<T>>(jsonData)!;
+            return dataList;
         }
-        public static List<Role> GetRoleData()
+        public static void AddDataToJson<T>(List<T> dataList)
         {
-            string roleData = File.ReadAllText(RoleFilePath);
-            List<Role> roleDataList = JsonSerializer.Deserialize<List<Role>>(roleData)!;
-            return roleDataList;
-        }
-        public static void AddRoleToJson(List<Role> roleDataList)
-        {
-            string jsonToString = JsonSerializer.Serialize(roleDataList);
-            File.WriteAllText(RoleFilePath, jsonToString);
-        }
-        public static void AddEmployeeToJson(List<Employee> employeeDataList)
-        {
-            string jsonToOutput = JsonSerializer.Serialize(employeeDataList);
-            File.WriteAllText(EmployeeFilePath, jsonToOutput);
+            var type = typeof(T);
+            string jsonToString = JsonSerializer.Serialize(dataList);
+            if (type == typeof(Role))
+            {
+                File.WriteAllText(roleFilePath, jsonToString);
+            }
+            else
+            {
+                File.WriteAllText(employeeFilePath, jsonToString);
+            }
         }
     }
 }

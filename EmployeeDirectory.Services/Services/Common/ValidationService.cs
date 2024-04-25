@@ -1,252 +1,199 @@
 ﻿using EmployeeDirectory.Data;
 using EmployeeDirectory.Models;
-using EmployeeDirectory.Services.Contract;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace EmployeeDirectory.Common.Services
 {
-    public class ValidationService:IValidation
+    //major focus
+    public static class ValidationService
     {
-        public  ValidationResult ValidateEmployeeId(string empId)
+       
+        public static ValidationResult ValidateNotEmpty(string inputField)
         {
-            List<Employee> employeeDataList = JsonFileHandler.GetEmployeeData();
-            ValidationResult validator = new();
+            if (string.IsNullOrEmpty(inputField))
+            {
+                return ValidationResult.OnFailure("This field is required so cannot be empty");
+            }
+            return ValidationResult.OnSuccess();
+        }
+        public static ValidationResult ValidateEmployeeIdFormate(string empId)
+        {
             var employeeIdRegex = @"^TZ\d{4}$";
-            bool isEmployeeIdValid = Regex.IsMatch(empId, employeeIdRegex);
-            bool isEmployeeIdUnique = true;
-            foreach (Employee emp in employeeDataList)
+            if (!Regex.IsMatch(empId, employeeIdRegex))
             {
-                if (emp.EmpId == empId)
-                {
-                    isEmployeeIdUnique = false;
-                    break;
-                }
-                else
-                {
-                    isEmployeeIdUnique = true;
-                }
+                return ValidationResult.OnFailure("This Employee Id Isn't valid Try in this formate (TZ1234)");
             }
-            if (!string.IsNullOrEmpty(empId))
-            {
-                if (isEmployeeIdValid)
-                {
-                    if (isEmployeeIdUnique)
-                    {
-                        validator.IsValid = true;
-                        return validator;
-                    }
-                    else
-                    {
-                        validator.IsValid = false;
-                        validator.Message = "This Employee Id already Exist in the DataBase Try Different one..";
-                        return validator;
-                    }
-                }
-                else
-                {
-                    validator.IsValid = false;
-                    validator.Message = "This Employee Id Isn't valid Try in this formate (TZ1234)";
-                    return validator;
-                }
-            }
-            else
-            {
-                validator.IsValid = false;
-                validator.Message = "This is Required Field , this can't be Empty";
-                return validator;
-            }
+            return ValidationResult.OnSuccess();
         }
-        public  ValidationResult ValidateFirstName(string firstName)
+        public static ValidationResult ValidateEmployeeIdUnique(string empId)
         {
-            ValidationResult validator = new();
-            var firstNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
-            bool isFirstNameValid = Regex.IsMatch(firstName, firstNameRegex);
-            if (string.IsNullOrEmpty(firstName))
+            List<Employee> employeeDataList = JsonFileHandler.GetData<Employee>();
+            if (employeeDataList.Any(emp => emp.EmpId == empId))
             {
-                validator.IsValid = false;
-                validator.Message = "This is Required Field , this can't be Empty";
-                return validator;
+                return ValidationResult.OnFailure("This Employee Id already Exist in the DataBase Try Different one..");
             }
-            else
-            {
-                if (isFirstNameValid)
-                {
-                    validator.IsValid = true;
-                    return validator;
-                }
-                else
-                {
-                    validator.IsValid = false;
-                    validator.Message = "Please Enter Alphabets only";
-                    return validator;
-                }
-            }
+            return ValidationResult.OnSuccess();
         }
-        public  ValidationResult ValidateLastName(string lastName)
+        public static ValidationResult ValidateName(string name)
         {
-            ValidationResult validator = new();
-            var lastNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
-            bool isLastNameValid = Regex.IsMatch(lastName, lastNameRegex);
-            if (isLastNameValid)
+            var nameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
+            if (!Regex.IsMatch(name, nameRegex))
             {
-                validator.IsValid = true;
-                return validator;
-
+                return ValidationResult.OnFailure("Please Enter Alphabets only");
             }
-            else
-            {
-                validator.IsValid = false;
-                validator.Message = "Please Enter Alphabets only";
-                return validator;
-            }
+            return ValidationResult.OnSuccess();
         }
-
-        public  ValidationResult ValidateEmail(string email)
+        public static ValidationResult ValidateEmailFormate(string email)
         {
-            ValidationResult validator = new();
             var emailRegex = @"^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$";
-            bool isEmailValid = Regex.IsMatch(email, emailRegex);
-            if (string.IsNullOrEmpty(email))
+            if (!Regex.IsMatch(email, emailRegex))
             {
-                validator.IsValid = false;
-                validator.Message = "This is Required Field , this can't be Empty";
-                return validator;
+                return ValidationResult.OnFailure("Please enter the correct Email");
             }
-            else
-            {
-                if (isEmailValid)
-                {
-                    validator.IsValid = true;
-                    return validator;
-                }
-                else
-                {
-                    validator.IsValid = false;
-                    validator.Message = "Please enter the correct Email";
-                    return validator;
-                }
-            }
+            return ValidationResult.OnSuccess();
         }
-        public  ValidationResult ValidatePhoneNumber(string phoneNo)
+        public static ValidationResult ValidatePhoneNoFormate(string phoneNo)
         {
-            ValidationResult validator = new();
             var phoneNoRegex = @"^\d{10}$";
-            bool isPhoneNoValid = Regex.IsMatch(phoneNo, phoneNoRegex);
-            if (string.IsNullOrEmpty(phoneNo))
+            if (!Regex.IsMatch(phoneNo, phoneNoRegex))
             {
-                validator.IsValid = false;
-                validator.Message = "This is Required Field , this can't be Empty";
-                return validator;
+                return ValidationResult.OnFailure("Enter the Valid Phone No. of 10 Digits");
             }
-            else
-            {
-                if (!isPhoneNoValid)
-                {
-                    validator.IsValid = false;
-                    validator.Message = "Enter the Valid Phone No. of 10 Digits";
-                    return validator;
-                }
-                else
-                {
-                    validator.IsValid = true;
-                    return validator;
-                }
-            }
+            return ValidationResult.OnSuccess();
+
         }
-        public  ValidationResult ValidateDate(string dob)
+        public static ValidationResult ValidateDate(string date)
         {
-            ValidationResult validator = new();
-            bool isDateValid = DateOnly.TryParse(dob, CultureInfo.CurrentCulture, out DateOnly date);
+            bool isDateValid = DateOnly.TryParse(date, CultureInfo.CurrentCulture, out DateOnly dateOutput);
             if (isDateValid)
             {
-                validator.IsValid = true;
-                return validator;
+                return ValidationResult.OnSuccess();
             }
             else
             {
-                validator.IsValid = false;
-                validator.Message = "Invalid Date Input ";
-                return validator;
+                return ValidationResult.OnFailure("Invalid Date Input ");
             }
         }
-        public  ValidationResult ValidateRoleName(string roleName)
+        public static ValidationResult ValidateEmployeeId(string empId)
         {
-            ValidationResult validator = new();
-            var roleNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
-            bool isRoleNameValid = Regex.IsMatch(roleName, roleNameRegex);
-            if (string.IsNullOrEmpty(roleName))
+            ValidationResult emptyValidationResult = ValidateNotEmpty(empId);
+            if (!emptyValidationResult.IsValid)
             {
-                validator.IsValid = false;
-                validator.Message = "This is Required Field , this can't be Empty";
-                return validator;
+                return emptyValidationResult;
             }
-            else
+            ValidationResult formatValidationResult = ValidateEmployeeIdFormate(empId);
+            if (!formatValidationResult.IsValid)
             {
-                if (isRoleNameValid)
-                {
-                    validator.IsValid = true;
-                    return validator;
-                }
-                else
-                {
-                    validator.IsValid = false;
-                    validator.Message = "Please Enter Alphabets only";
-                    return validator;
-                }
+                return formatValidationResult;
             }
+            ValidationResult uniqueValidation = ValidateEmployeeIdUnique(empId);
+            if (!uniqueValidation.IsValid)
+            {
+                return uniqueValidation;
+            }
+            return ValidationResult.OnSuccess();
         }
-        public  ValidationResult ValidateLocation(string location)
+        public static ValidationResult ValidateFirstName(string firstName)
         {
-            ValidationResult validator = new();
-            var locationNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
-            bool isLocationValid = Regex.IsMatch(location, locationNameRegex);
-            if (string.IsNullOrEmpty(location))
+            ValidationResult emptyValidationResult = ValidateNotEmpty(firstName);
+            if (!emptyValidationResult.IsValid)
             {
-                validator.IsValid = false;
-                validator.Message = "This is Required Field , this can't be Empty";
-                return validator;
+                return emptyValidationResult;
             }
-            else
+            ValidationResult validateFirstName= ValidateName(firstName);
+            if (!validateFirstName.IsValid)
             {
-                if (isLocationValid)
-                {
-                    validator.IsValid = true;
-                    return validator;
-                }
-                else
-                {
-                    validator.IsValid = false;
-                    validator.Message = "Please Enter Alphabets only";
-                    return validator;
-                }
+                return validateFirstName;
             }
+            return ValidationResult.OnSuccess();
         }
-        public  ValidationResult ValidateDepartment(string department)
+        public static ValidationResult ValidateLastName(string lastName)
         {
-            ValidationResult validator = new();
-            var departmentNameRegex = @"^(?!\s+$)[a-zA-Z\s]+$";
-            bool isDepartmentValid = Regex.IsMatch(department, departmentNameRegex);
-            if (string.IsNullOrEmpty(department))
+            ValidationResult emptyValidationResult = ValidateNotEmpty(lastName);
+            if (!emptyValidationResult.IsValid)
             {
-                validator.IsValid = false;
-                validator.Message = "This is Required Field , this can't be Empty";
-                return validator;
+                return emptyValidationResult;
             }
-            else
+            ValidationResult validateLastName = ValidateName(lastName);
+            if (!validateLastName.IsValid)
             {
-                if (isDepartmentValid)
-                {
-                    validator.IsValid = true;
-                    return validator;
-                }
-                else
-                {
-                    validator.IsValid = false;
-                    validator.Message = "Please Enter Alphabets only";
-                    return validator;
-                }
+                return validateLastName;
             }
+            return ValidationResult.OnSuccess();
+        }
+
+        public static ValidationResult ValidateEmail(string email)
+        {
+            ValidationResult emptyValidationResult = ValidateNotEmpty(email);
+            if (!emptyValidationResult.IsValid)
+            {
+                return emptyValidationResult;
+            }
+            ValidationResult validateEmail = ValidateEmailFormate(email);
+            if (!validateEmail.IsValid)
+            {
+                return validateEmail;
+            }
+            return ValidationResult.OnSuccess();
+        }
+        public static ValidationResult ValidatePhoneNumber(string phoneNo)
+        {
+            ValidationResult emptyValidationResult = ValidateNotEmpty(phoneNo);
+            if (!emptyValidationResult.IsValid)
+            {
+                return emptyValidationResult;
+            }
+            ValidationResult validatePhoneNo = ValidateName(phoneNo);
+            if (!validatePhoneNo.IsValid)
+            {
+                return validatePhoneNo;
+            }
+            return ValidationResult.OnSuccess();
+        }
+        
+        public static ValidationResult ValidateRoleName(string roleName)
+        {
+            ValidationResult emptyValidationResult = ValidateNotEmpty(roleName);
+            if (!emptyValidationResult.IsValid)
+            {
+                return emptyValidationResult;
+            }
+            ValidationResult validateRoleName = ValidateName(roleName);
+            if (!validateRoleName.IsValid)
+            {
+                return validateRoleName;
+            }
+            return ValidationResult.OnSuccess();
+        }
+        public static ValidationResult ValidateLocation(string location)
+        {
+            ValidationResult emptyValidationResult = ValidateNotEmpty(location);
+            if (!emptyValidationResult.IsValid)
+            {
+                return emptyValidationResult;
+            }
+            ValidationResult validateLocationName = ValidateName(location);
+            if (!validateLocationName.IsValid)
+            {
+                return validateLocationName;
+            }
+            return ValidationResult.OnSuccess();
+        }
+        public static ValidationResult ValidateDepartment(string department)
+        {
+            ValidationResult emptyValidationResult = ValidateNotEmpty(department);
+            if (!emptyValidationResult.IsValid)
+            {
+                return emptyValidationResult;
+            }
+            ValidationResult validateDepartmentName = ValidateName(department);
+            if (!validateDepartmentName.IsValid)
+            {
+                return validateDepartmentName;
+            }
+            return ValidationResult.OnSuccess();
         }
 
     }

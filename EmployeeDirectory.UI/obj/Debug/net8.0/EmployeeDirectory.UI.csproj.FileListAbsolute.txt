@@ -44,3 +44,5 @@ C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\
 C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\EmployeeDirectory.UI.pdb
 C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\EmployeeDirectory.UI.genruntimeconfig.cache
 C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\obj\Debug\net8.0\ref\EmployeeDirectory.UI.dll
+C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\bin\Debug\net8.0\Data\role.json
+C:\Users\sagar.h\source\repos\Employee Directory\EmployeeDirectory.UI\bin\Debug\net8.0\Data\employee.json
