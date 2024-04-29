@@ -22,7 +22,6 @@ namespace EmployeeDirectory.Services
             employeeDataList[index] = empData;
             JsonFileHandler.AddDataToJson(employeeDataList);
         }
-
         public void DeleteEmployee(string employeeId,Employee employeeData)
         {
                 employeeData.IsDeleted = true;

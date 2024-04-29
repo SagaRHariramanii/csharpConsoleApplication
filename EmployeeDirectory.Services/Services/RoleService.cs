@@ -38,13 +38,14 @@ namespace EmployeeDirectory.Services
             List<Role> roleDataList = JsonFileHandler.GetData<Role>();
             return roleDataList.Count;
         }
-        public Role GetRoleDataByIndex(int index)
+        public Role GetRoleDataById(string roleId)
         {
-            //dont depend on index
             List<Role> roleDataList = JsonFileHandler.GetData<Role>();
-            return roleDataList[index];
+            Role roleData= (from role in roleDataList where role.Id == roleId select role).FirstOrDefault()!;
+            return roleData;
 
         }
+        
         public List<Role> GetRoleDataList()
         {
             return JsonFileHandler.GetData<Role>();

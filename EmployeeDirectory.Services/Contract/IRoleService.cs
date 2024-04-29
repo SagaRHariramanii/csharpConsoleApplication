@@ -13,7 +13,7 @@ namespace EmployeeDirectory.Services.Contract
         Role? GetRoleInformation(string id);
         string? GetRoleId(string location, string department, string roleName);
         int GetRoleCount();
-        Role GetRoleDataByIndex(int index);
+        Role GetRoleDataById(string roleId);
         List<Role> GetRoleDataList();
 
     }

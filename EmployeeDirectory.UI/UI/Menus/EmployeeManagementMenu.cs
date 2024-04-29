@@ -184,9 +184,9 @@ namespace EmployeeDirectory.UI.Menus
         {
             int i = 1;
             List<string> locations = [];
-            for (int j = 0; j < roleService.GetRoleCount(); j++)
+            for (int j = 1; j <= roleService.GetRoleCount(); j++)
             {
-                locations.Add(roleService.GetRoleDataByIndex(j).Location);
+                locations.Add(roleService.GetRoleDataById("R"+j).Location);
             }
             string[] uniqueLocations = locations.Distinct().ToArray();
             Console.WriteLine("--------------------- Locations ---------------------");
@@ -214,11 +214,11 @@ namespace EmployeeDirectory.UI.Menus
             string selectedLocation = location;
             int i = 1;
             List<string> departments = [];
-            for (int j = 0; j < roleService.GetRoleCount(); j++)
+            for (int j = 1; j <= roleService.GetRoleCount(); j++)
             {
-                if (selectedLocation == roleService.GetRoleDataByIndex(j).Location)
+                if (selectedLocation == roleService.GetRoleDataById("R"+j).Location)
                 {
-                    departments.Add(roleService.GetRoleDataByIndex(j).Department);
+                    departments.Add(roleService.GetRoleDataById("R"+j).Department);
                 }
             }
             string[] uniqueDepartments = departments.Distinct().ToArray();
@@ -248,13 +248,13 @@ namespace EmployeeDirectory.UI.Menus
             string selectedDepartment = department;
             List<string> jobTitles = [];
             int i = 1;
-            for (int j = 0; j < roleService.GetRoleCount(); j++)
+            for (int j = 1; j <= roleService.GetRoleCount(); j++)
             {
-                if (selectedLocation == roleService.GetRoleDataByIndex(j).Location)
+                if (selectedLocation == roleService.GetRoleDataById("R"+j).Location)
                 {
-                    if (selectedDepartment == roleService.GetRoleDataByIndex(j).Department)
+                    if (selectedDepartment == roleService.GetRoleDataById("R"+j).Department)
                     {
-                        jobTitles.Add(roleService.GetRoleDataByIndex(j).Name);
+                        jobTitles.Add(roleService.GetRoleDataById("R"+j).Name);
                     }
                 }
             }
@@ -331,7 +331,7 @@ namespace EmployeeDirectory.UI.Menus
             string jobTitle = GetJobTitle(location, department);
             emp.ManagerName = GetManager();
             emp.ProjectName = GetProject();
-            emp.RoleId = roleService.GetRoleId(location, department, jobTitle)!;
+            emp.RoleId = roleService.GetRoleId(jobTitle,location, department)!;
             emp.IsDeleted = false;
             employeeService.AddEmployee(emp);
             Console.WriteLine("Employee Added SuccessFully");
@@ -373,16 +373,25 @@ namespace EmployeeDirectory.UI.Menus
         }
         public void DisplayEmployeeData(Employee employeeData)
         {
-            Role roleDetail = roleService.GetRoleInformation(employeeData.RoleId)!;
             Console.WriteLine("1.  First Name: " + employeeData.FirstName);
             Console.WriteLine("2.  Last Name: " + employeeData.LastName);
             Console.WriteLine("3.  Date of Birth: " + employeeData.Dob);
             Console.WriteLine("4.  Email: " + employeeData.Email);
             Console.WriteLine("5.  Phone number: " + employeeData.PhoneNo);
             Console.WriteLine("6.  Joining Date: " + employeeData.JoiningDate);
-            Console.WriteLine("7.  Location: " + roleDetail.Location);
-            Console.WriteLine("8.  Job Title: " + roleDetail.Name);
-            Console.WriteLine("9.  Department: " + roleDetail.Department);
+            Role roleDetail = roleService.GetRoleInformation(employeeData.RoleId)!;
+            if (roleDetail != null)
+            {
+                Console.WriteLine("7.  Location: " + roleDetail.Location);
+                Console.WriteLine("8.  Job Title: " + roleDetail.Name);
+                Console.WriteLine("9.  Department: " + roleDetail.Department);
+            }
+            else
+            {
+                Console.WriteLine("7.  Location: " + "");
+                Console.WriteLine("8.  Job Title: " + "");
+                Console.WriteLine("9.  Department: " + "");
+            }
             Console.WriteLine("10. Manager Name: " + employeeData.ManagerName);
             Console.WriteLine("11. Project Name: " + employeeData.ProjectName);
         }
@@ -432,7 +441,7 @@ namespace EmployeeDirectory.UI.Menus
                     string changedLocation = GetLocation();
                     string changedDepartment = GetDepartment(changedLocation);
                     string changedJobTitle = GetJobTitle(changedLocation, changedDepartment);
-                    string roleId = roleService.GetRoleId(changedLocation, changedDepartment, changedJobTitle)!;
+                    string roleId = roleService.GetRoleId(changedJobTitle,changedLocation, changedDepartment)!;
                     employeeData.RoleId = roleId;
                     employeeService.EditEmployee(employeeID, employeeData);
                     Console.WriteLine("Location,Department,Job Title Changed SuccessFully");

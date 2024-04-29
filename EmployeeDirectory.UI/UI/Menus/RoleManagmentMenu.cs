@@ -110,7 +110,7 @@ namespace EmployeeDirectory.UI.Menus
             role.Location = GetLocation();
             role.Description = GetRoleDescription();
             role.Department = GetDepartment();
-            string lastRoleId = roleService.GetRoleDataByIndex(roleService.GetRoleCount() - 1).Id;
+            string lastRoleId = roleService.GetRoleDataById("R"+(roleService.GetRoleCount() - 1)).Id;
             role.Id = "R" + (Convert.ToInt16(lastRoleId[1..]) + 1);
             roleService.AddRole(role);
             Console.WriteLine("Role Added SuccessFully");

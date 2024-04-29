@@ -2,11 +2,9 @@
 using EmployeeDirectory.Models;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace EmployeeDirectory.Common.Services
 {
-    //major focus
     public static class ValidationService
     {
        
